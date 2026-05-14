@@ -30,7 +30,7 @@ const DEVTOOLS_WIDTH_THRESHOLD = 150;
 const DEVTOOLS_HEIGHT_THRESHOLD = 150;
 
 // Флаг состояния (чтобы не дёргать DOM каждый кадр)
-let devToolsCurrentlyOpen = false;
+let devToolsCurrentlyOpen = true;
 
 function setupDevToolsDetection() {
   // Проверяем каждые 1000ms
