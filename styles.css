@@ -1269,35 +1269,6 @@ select.form-input { cursor: pointer; }
   cursor: pointer;
 }
 
-/* ─── DevTools overlay ───────────────────────────────────────────── */
-.devtools-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--clr-accent);
-  z-index: 99999;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
-  padding: 40px;
-}
-
-.devtools-overlay.hidden { display: none !important; }
-
-.devtools-message i {
-  font-size: 4rem;
-  color: var(--clr-accent-2);
-  margin-bottom: 24px;
-}
-
-.devtools-message h2 {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-}
-
-.devtools-message p { opacity: 0.8; font-size: 1rem; }
 
 /* ─── Подвал ─────────────────────────────────────────────────────── */
 .site-footer {
