@@ -14,7 +14,6 @@
 
 // ── Главная функция инициализации (вызывается из app.js) ─────────
 function initProtection() {
-  setupDevToolsDetection();
   setupRightClickProtection();
   setupHotkeyProtection();
 }
