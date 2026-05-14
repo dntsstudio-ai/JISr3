@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Узнайте, какой сегодня праздник. Официальные, народные, международные и необычные праздники каждого дня.">
+  <meta name="keywords" content="праздник, календарь праздников, сегодня праздник, какой сегодня праздник">
+  <meta name="author" content="Праздничный календарь">
+  <meta property="og:title" content="Какой сегодня праздник?" id="og-title">
+  <meta property="og:description" content="Ежедневный календарь праздников России.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prazdichniykalendar.ru">
+  <meta property="og:image" content="https://prazdichniykalendar.ru/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>Праздничный календарь</title>
+
+  <!-- Google Fonts: Cormorant Garamond + Jost -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Основные стили -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Шапка ────────────────────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Логотип -->
+      <a href="#/" class="logo" aria-label="На главную">
+        <i class="fa-solid fa-calendar-star"></i>
+        <span class="logo-text">Праздничный<br><strong>Календарь</strong></span>
+      </a>
+
+      <!-- Навигация (десктоп) -->
+      <nav class="main-nav" id="main-nav" aria-label="Основная навигация">
+        <a href="#/" class="nav-link" data-route="home">
+          <i class="fa-solid fa-house"></i><span>Главная</span>
+        </a>
+        <a href="#/calendar" class="nav-link" data-route="calendar">
+          <i class="fa-solid fa-calendar-days"></i><span>Календарь</span>
+        </a>
+        <a href="#/contacts" class="nav-link" data-route="contacts">
+          <i class="fa-solid fa-envelope"></i><span>Контакты</span>
+        </a>
+        <!-- Только для авторизованных -->
+        <a href="#/profile" class="nav-link auth-only hidden" data-route="profile">
+          <i class="fa-solid fa-circle-user"></i><span>Профиль</span>
+        </a>
+        <!-- Только для администраторов -->
+        <a href="#/stats" class="nav-link admin-only hidden" data-route="stats">
+          <i class="fa-solid fa-chart-line"></i><span>Статистика</span>
+        </a>
+        <!-- Только для гостей -->
+        <a href="#/login" class="nav-link guest-only" data-route="login">
+          <i class="fa-solid fa-right-to-bracket"></i><span>Войти</span>
+        </a>
+      </nav>
+
+      <!-- Бургер-кнопка (мобильный) -->
+      <button class="burger-btn" id="burger-btn"
+              aria-label="Открыть меню" aria-expanded="false"
+              type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-menu hidden" id="mobile-menu" aria-label="Мобильная навигация">
+      <a href="#/" class="mobile-nav-link" data-route="home">
+        <i class="fa-solid fa-house"></i> Главная
+      </a>
+      <a href="#/calendar" class="mobile-nav-link" data-route="calendar">
+        <i class="fa-solid fa-calendar-days"></i> Календарь
+      </a>
+      <a href="#/contacts" class="mobile-nav-link" data-route="contacts">
+        <i class="fa-solid fa-envelope"></i> Контакты
+      </a>
+      <a href="#/profile" class="mobile-nav-link auth-only hidden" data-route="profile">
+        <i class="fa-solid fa-circle-user"></i> Профиль
+      </a>
+      <a href="#/stats" class="mobile-nav-link admin-only hidden" data-route="stats">
+        <i class="fa-solid fa-chart-line"></i> Статистика
+      </a>
+      <a href="#/login" class="mobile-nav-link guest-only" data-route="login">
+        <i class="fa-solid fa-right-to-bracket"></i> Войти
+      </a>
+    </nav>
+  </header>
+
+  <!-- ── Основной контент (SPA) ───────────────────────────────── -->
+  <main class="main-content" id="main-content">
+    <div class="page-loading" id="page-loading">
+      <div class="spinner">
+        <i class="fa-solid fa-calendar-star fa-spin"></i>
+      </div>
+      <p>Загрузка...</p>
+    </div>
+  </main>
+
+  <!-- ── Глобальное модальное окно (CRUD, подтверждения) ─────── -->
+  <div class="modal-overlay hidden" id="global-modal-overlay"
+       role="dialog" aria-modal="true">
+    <div class="global-modal" id="global-modal">
+      <button class="modal-close" id="global-modal-close" aria-label="Закрыть" type="button">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="global-modal-content" id="global-modal-content">
+        <!-- Контент вставляется динамически через admin.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Рекламный баннер ────────────────────────────────────── -->
+  <!-- Баннер создаётся динамически через ads.js как #site-ad-banner -->
+  <!-- Это фиксированный элемент на странице, не модальное окно -->
+
+  <!-- ── Подвал ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <i class="fa-solid fa-calendar-star"></i>
+        <span>Праздничный Календарь</span>
+      </div>
+      <p class="footer-copy">
+        &copy; <span id="footer-year"></span>
+        Праздничный Календарь. Все права защищены.
+      </p>
+      <nav class="footer-nav" aria-label="Навигация в подвале">
+        <a href="#/">Главная</a>
+        <a href="#/calendar">Календарь</a>
+        <a href="#/contacts">Контакты</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Firebase SDK (compat — работает без сборщиков)
+       ═══════════════════════════════════════════════════════════ -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <!-- Chart.js для графиков статистики -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <!-- Конфиг Firebase — НЕ коммитить в Git! -->
+  <script src="firebase-config.js"></script>
+
+  <!-- Модули приложения (порядок важен) -->
+  <script src="utils.js"></script>
+  <script src="auth.js"></script>
+  <script src="ads.js"></script>
+  <script src="contacts.js"></script>
+  <script src="stats.js"></script>
+  <script src="calendar.js"></script>
+  <script src="admin.js"></script>
+
+  <!-- Главный файл — роутинг и инициализация (последним) -->
+  <script src="app.js"></script>
+
+</body>
+</html>
